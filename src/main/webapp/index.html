@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="./script/jquery.js"></script>
+<script type="text/javascript"><!--
+
+var handleSuccess = function(data) {
+}
+
+$(function(){
+	$("#createForm").submit(function(){
+		return false;
+	});
+});
+
+$(function(){
+	$("#refreshAction").click(function(){
+		loadCustomers();
+	});
+});
+
+
+function loadCustomers() {
+	$.getJSON(
+		"http://localhost:8080/cxf-jaxrs/service/customerservice/customers/", function(data, status) {
+		$("#result").empty();
+		$("#result").append('<table>');
+		$("#result").append('<tr><th>id</th><th>name</th></tr>');
+		$.each(data.Customers.customers, function() {
+				$("#result").append('<tr><td>' + this.id + '</td><td>' + this.name + '</td></tr>');								
+		});
+		$("#result").append('</table>');
+	});
+}
+
+//-->
+</script>
+</head>
+<body>
+
+<script type="text/javascript">
+		loadCustomers();
+</script>
+
+<h1>Customer Edit</h1>
+<button id="refreshAction" type="button">refresh</button>
+<form id="createhForm">
+<input type="text" id="id" value="001"/>
+<input type="text" id="name" value="name"/>
+<button type="submit">create</button>
+</form>
+<hr/>
+<div id="container"></div>
+<div id="result"></div>
+</body>
+</html>
