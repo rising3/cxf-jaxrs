@@ -11,9 +11,9 @@ http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<jaxrs:client id="customerServiceRequestor"
-		address="http://localhost:8080/cxf-jaxrs/service/customerservice"
-		serviceClass="jp.opensquare.sandbox.cxf.jaxrs.provider.CustomerService"
+	<jaxrs:client id="customerResource"
+		address="http://localhost:8080/cxf-jaxrs/resources/"
+		serviceClass="jp.opensquare.sandbox.cxf.jaxrs.provider.CustomerResource"
 		inheritHeaders="true">
 	</jaxrs:client>	
 </beans>

@@ -1,7 +1,7 @@
 package jp.opensquare.sandbox.cxf.jaxrs.requestor;
 
 import jp.opensquare.sandbox.cxf.jaxrs.provider.Customer;
-import jp.opensquare.sandbox.cxf.jaxrs.provider.CustomerService;
+import jp.opensquare.sandbox.cxf.jaxrs.provider.CustomerResource;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,15 +10,28 @@ public class ServiceRequestor {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 				new String[] { "requestor-beans.xml" });
 
-		CustomerService requestor = (CustomerService) context.getBean("customerServiceRequestor");
-		Customer newCustomer = new Customer("999", "create Customer");
-		requestor.createCustomer(newCustomer);
-		newCustomer.setName("update");
-		requestor.updateCustomer(newCustomer);
-		requestor.removeCustomer(newCustomer.getId());
+		CustomerResource customerResource = (CustomerResource) context.getBean("customerResource");
 		
-		for(Customer customer : requestor.getCustomers().getCustomers()) {
-			System.out.println(customer);
+		System.out.println("=== @GET RESULT");
+		System.out.println(customerResource.getCustomer("001"));
+
+		System.out.println("=== @POST RESULT");
+		Customer customer = customerResource.createCustomer(new Customer("999", "create customer"));
+		for(Customer item : customerResource.getCustomers().getCustomer()) {
+			System.out.println(item);
+		}
+
+		System.out.println("=== @PUT RESULT");
+		customer.setName("update customer");
+		customerResource.updateCustomer(customer);
+		for(Customer item : customerResource.getCustomers().getCustomer()) {
+			System.out.println(item);
+		}
+		
+		System.out.println("=== @DELETE RESULT");
+		customerResource.removeCustomer(customer.getId());
+		for(Customer item : customerResource.getCustomers().getCustomer()) {
+			System.out.println(item);
 		}
 		System.exit(0);
 	}

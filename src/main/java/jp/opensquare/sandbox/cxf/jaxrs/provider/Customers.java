@@ -1,27 +1,27 @@
 package jp.opensquare.sandbox.cxf.jaxrs.provider;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "Customers")
+@XmlRootElement(name = "customers")
 public class Customers {
-	private Collection<Customer> customers;
+	private List<Customer> customer;
 
-	public Collection<Customer> getCustomers() {
-		return customers;
+	public List<Customer> getCustomer() {
+		return customer;
 	}
 
-	public void setCustomers(Collection<Customer> customers) {
-		this.customers = customers;
+	public void setCustomer(List<Customer> data) {
+		this.customer = data;
 	}
 
 	public Customers() {
 		super();
 	}
-	public Customers(Collection<Customer> customers) {
+	public Customers(List<Customer> customer) {
 		super();
-		this.customers = customers;
+		this.customer = customer;
 	}
 	
 }

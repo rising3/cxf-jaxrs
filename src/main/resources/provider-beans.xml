@@ -11,12 +11,12 @@ http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<jaxrs:server id="customerService" address="/">
+	<jaxrs:server id="customer" address="/">
 		<jaxrs:serviceBeans>
-			<ref bean="customerBean" />
+			<ref bean="customerResource" />
 		</jaxrs:serviceBeans>
 	</jaxrs:server>
 
-	<bean id="customerBean" class="jp.opensquare.sandbox.cxf.jaxrs.provider.CustomerServiceImpl" />
+	<bean id="customerResource" class="jp.opensquare.sandbox.cxf.jaxrs.provider.CustomerResourceImpl" />
 	
 </beans>

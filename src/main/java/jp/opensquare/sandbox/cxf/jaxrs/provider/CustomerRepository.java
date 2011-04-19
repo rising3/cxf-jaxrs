@@ -40,29 +40,21 @@ public class CustomerRepository {
 	}
 
 	public Customer createCustomer(Customer customer) {
-		Customer result = null;
 		if(!repo.containsKey(customer.getId())) {
-			result = customer;
 			repo.put(customer.getId(), customer);
 		}
-		return result;
+		return repo.get(customer.getId());
 	}
 
-	public Customer updateCustomer(Customer customer) {
-		Customer result = null;
+	public void updateCustomer(Customer customer) {
 		if(repo.containsKey(customer.getId())) {
-			result = customer;
 			repo.put(customer.getId(), customer);
 		}
-		return result;
 	}
 	
-	public Customer removeCustomer(String id) {
-		Customer result = null;
+	public void removeCustomer(String id) {
 		if(repo.containsKey(id)) {
-			result =repo.get(id);
 			repo.remove(id);
 		}
-		return result;
 	}
 }
