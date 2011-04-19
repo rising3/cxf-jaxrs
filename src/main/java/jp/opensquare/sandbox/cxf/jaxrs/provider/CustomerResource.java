@@ -11,19 +11,19 @@ import javax.ws.rs.Produces;
 @Path("/customer")
 public interface CustomerResource {
 
-	@Produces({"application/json","application/xml"})
 	@GET
 	@Path("/get/{id}")
+	@Produces({"application/json", "application/xml"})
 	Customer getCustomer(@PathParam("id") String id);
 
-	@Produces({"application/json","application/xml"})
 	@GET
 	@Path("/all")
+	@Produces({"application/json", "application/xml"})
 	Customers getCustomers();
 
-	@Produces({"application/json","application/xml"})
 	@POST
 	@Path("/create")
+	@Produces({"application/json", "application/xml"})
 	Customer createCustomer(Customer customer);
 
 	@PUT
