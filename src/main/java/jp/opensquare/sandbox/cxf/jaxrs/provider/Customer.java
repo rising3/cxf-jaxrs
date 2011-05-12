@@ -2,7 +2,7 @@ package jp.opensquare.sandbox.cxf.jaxrs.provider;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "Customer")
+@XmlRootElement(name = "customer")
 public class Customer {
 	private String id;
 	private String name;
