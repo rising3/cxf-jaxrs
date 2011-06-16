@@ -7,8 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ServiceRequestor {
 	public static void main(String[] args) {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				new String[] { "requestor-beans.xml" });
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("requestor-beans.xml");
 
 		CustomerResource customerResource = (CustomerResource) context.getBean("customerResource");
 		

@@ -1,23 +1,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>jp.oepnsquare.sandbox.cxf.jaxws</groupId>
+	<groupId>jp.oepnsquare.sandbox.cxf.jaxrs</groupId>
 	<artifactId>cxf-jaxrs</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-
+	<url>http://opensquare.jp/blog/?p=1108</url>
+	<description>Code sample illustrates how to develop a service using the &quot;apache CXF and Spring Framework&quot; approach with the JAX-RS APIs.</description>
 	<properties>
-		<cxf.version>2.3.3</cxf.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<cxf.version>2.4.1</cxf.version>
 	</properties>
-	<repositories>
-		<repository>
-			<id>com.springsource.repository.maven.release</id>
-			<url>http://maven.springframework.org/release/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+    <profiles>
+        <profile>
+            <id>provider</id>
+            <build>
+                <defaultGoal>jetty:run</defaultGoal>
+            </build>
+        </profile>
+        <profile>
+            <id>requestor</id>
+            <build>
+                <defaultGoal>test</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <mainClass>jp.opensquare.sandbox.cxf.jaxrs.requestor.ServiceRequestor</mainClass>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 	<build>
 		<finalName>cxf-jaxrs</finalName>
 		<plugins>
@@ -48,16 +72,6 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>3.0.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-			<version>${cxf.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 			<version>${cxf.version}</version>
@@ -70,19 +84,12 @@
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-databinding-aegis</artifactId>
-			<!-- 2.3.2 or 2.4.0 -->
 			<version>${cxf.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.xmlbeans</groupId>
-			<artifactId>xmlbeans</artifactId>
-			<version>2.4.0</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.6.1</version>
 		</dependency>
-		<!-- Jetty is needed if you're are not using the CXFServlet -->
-		<!--
-			<dependency> <groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-transports-http-jetty</artifactId>
-			<version>${cxf.version}</version> </dependency>
-		-->
 	</dependencies>
 </project>
